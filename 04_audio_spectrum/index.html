@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/p5@1.11.2/lib/p5.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.4/addons/p5.sound.min.js"></script>
+  <!--     <link rel="stylesheet" type="text/css" href="style.css"> -->
+
+  <meta charset="utf-8" />
+  <style>
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    canvas {
+      display: block;
+    }
+  </style>
+
+</head>
+
+<body>
+  <main>
+  </main>
+  <!--     <script src="sketch.js"></script> -->
+  <script>
+    let mic, fft;
+
+    function touchStarted() {
+      // Errors messages (CTRL SHIFT i) Chrome Developer Tools:
+      // The AudioContext was not allowed to start. It must be resumed (or created) after a user gesture on the page. https://goo.gl/7K7WLu
+      // DevTools failed to load SourceMap: Could not load content for https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/addons/p5.sound.min.js.map: HTTP error: status code 404, net::ERR_HTTP_RESPONSE_CODE_FAILURE
+      if (getAudioContext().state !== 'running') {
+        getAudioContext().resume();
+      }
+
+      // full screen: https://editor.p5js.org/slow_izzm/sketches/lgzf4tJk6
+      let fs = fullscreen();
+      if (!fs) {
+        fullscreen(true);
+      }
+    }
+
+
+    function setup() {
+      createCanvas(displayWidth, displayHeight);
+      noFill();
+
+      mic = new p5.AudioIn();
+      mic.start();
+      fft = new p5.FFT();
+      fft.setInput(mic);
+    }
+
+    function draw() {
+      background(200);
+
+      let spectrum = fft.analyze();
+
+      beginShape();
+      for (i = 0; i < spectrum.length; i++) {
+        vertex(i, map(spectrum[i], 0, 255, height, 0));
+        let x = map(i, 0, spectrum.length, 0, width);
+        let h = - height + map(spectrum[i], 0, 255, height, 0);
+        rect(x, height, width / spectrum.length, h);
+      }
+      endShape();
+    }
+  </script>
+</body>
+
+</html>

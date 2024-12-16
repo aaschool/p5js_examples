@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Simple P5 sketch</title>
+  <script src="https://cdn.jsdelivr.net/npm/p5@1.11.2/lib/p5.min.js"></script>
+
+  <meta charset="utf-8" />
+  <!--     <link rel="stylesheet" type="text/css" href="style.css"> -->
+  <style>
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    canvas {
+      display: block;
+    }
+  </style>
+
+</head>
+
+<body>
+  <main>
+  </main>
+  <!--     <script src="sketch.js"></script> -->
+  <script>
+
+    function setup() {
+      createCanvas(displayWidth, displayHeight);
+      background(200);
+    }
+
+    function draw() {
+      // background(200);
+
+      //when mouse button is pressed, draw a circle
+      if (mouseIsPressed === true) {
+        // fill with the colour white
+        fill(255);
+        //draw a circle at the mouse position
+        circle(mouseX, mouseY, 50);
+      } else {
+        fill(255);
+      }
+      
+    }
+  </script>
+</body>
+
+</html>
