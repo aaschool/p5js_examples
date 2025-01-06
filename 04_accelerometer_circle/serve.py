@@ -8,7 +8,8 @@ Handler = http.server.SimpleHTTPRequestHandler
 
 # Create an SSL context
 context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
-context.load_cert_chain('cert.pem', 'key.pem')  # Replace with your certificate and key files
+# Load the certificate chain
+context.load_cert_chain('cert.pem', 'key.pem')  
 
 # Create an HTTPS server with the SSL context
 with socketserver.TCPServer(("", PORT), Handler) as httpd:
