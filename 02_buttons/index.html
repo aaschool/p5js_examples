@@ -4,12 +4,11 @@
 <head>
   <title>P5 Buttons</title>
   <script src="https://cdn.jsdelivr.net/npm/p5@1.11.2/lib/p5.min.js"></script>
-  <!-- <script src="https://raw.githubusercontent.com/quarks/canvasGUI/refs/heads/main/dist/canvasgui/0.9.4/gui.min.js"></script> -->
   <script src="https://unpkg.com/p5.touchgui@0.5.2/lib/p5.touchgui.js"></script>
 
   <meta charset="utf-8" />
-  <!--     <link rel="stylesheet" type="text/css" href="style.css"> -->
   <style>
+    
     html,
     body {
       margin: 0;
@@ -26,40 +25,61 @@
 <body>
   <main>
   </main>
-  <!--     <script src="sketch.js"></script> -->
   <script>
     let gui;
-    let b;
+    let redb, greenb, blueb, yellowb, cyanb, magentab;
+    let bgcolor;
 
     function setup() {
       createCanvas(displayWidth, displayHeight);
       background(200);
-      // gui = GUI.get(p5canvas);
-      // gui.button('btn0', 50, 10, 100, 25).text('Click me!')
-      //   .textSize(15).scheme('red');
+      
       gui = createGui();
-      b = createButton("Button", 50, 50);
+      
+      redb = createButton("Red", 50, 50);
+      redb.setStyle({
+          fillBg: color("#FF0000"),
+          rounding: 10,
+          textSize: 20
+      });
+      
+      greenb = createButton("Green", 50, 100);
+      greenb.setStyle({
+          fillBg: color("#00CC00"),
+          rounding: 10,
+          textSize: 20
+      });
+      
+      blueb = createButton("Blue", 50, 150);
+      blueb.setStyle({
+          fillBg: color("#0099FF"),
+          rounding: 10,
+          textSize: 20
+      });
+      
+      bgcolor = color("#AAAAAA");
 
-      // Create an anchor element that links to p5js.org.
-      let a = createA('http://p5js.org/', 'p5*js');
-      a.position(100, 100);
-
-      describe('The text "p5*js" written at the center of a gray square.');
     }
 
     function draw() {
-      // push();
-      // background(240);
-      // // user code to create the frame image
-
-      // pop();
-      // gui.draw(); // Will display the controls created in setup
-      background(200);
+      
+      background(bgcolor);
+      
       drawGui();
 
-      if (b.isPressed) {
-        print(b.label + " is pressed.");
-        window.open("http://p5js.org/", "_blank");
+      if (redb.isPressed) {
+        print(redb.label + " is pressed.");
+        bgcolor = color("#FF0000");
+      }
+      
+      if (greenb.isPressed) {
+        print(redb.label + " is pressed.");
+        bgcolor = color("#00CC00");
+      }
+      
+      if (blueb.isPressed) {
+        print(redb.label + " is pressed.");
+        bgcolor = color("#0099FF");
       }
 
     }
